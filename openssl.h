@@ -17,9 +17,11 @@ public:
 
 public:
 	string m_strTeamId;
+	string m_strBundleId;
 	string m_strSubjectCN;
 	string m_strProvisionData;
 	string m_strEntitlementsData;
+	string m_strProvisionFile;
 
 private:
 	void *m_evpPkey;

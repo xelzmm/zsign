@@ -584,6 +584,7 @@ ZSignAsset::ZSignAsset()
 
 bool ZSignAsset::Init(const string &strSignerCertFile, const string &strSignerPKeyFile, const string &strProvisionFile, const string &strEntitlementsFile, const string &strPassword)
 {
+	m_strProvisionFile = strProvisionFile;
 	ReadFile(strProvisionFile.c_str(), m_strProvisionData);
 	ReadFile(strEntitlementsFile.c_str(), m_strEntitlementsData);
 	if (m_strProvisionData.empty())
@@ -603,6 +604,8 @@ bool ZSignAsset::Init(const string &strSignerCertFile, const string &strSignerPK
 			{
 				jvProv["Entitlements"].writePList(m_strEntitlementsData);
 			}
+			string strApplicationIdentifier = jvProv["Entitlements"]["application-identifier"];
+			m_strBundleId = StringReplace(strApplicationIdentifier, jvProv["TeamIdentifier"][0].asString() + ".", "");
 		}
 	}
 

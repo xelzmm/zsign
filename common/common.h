@@ -45,6 +45,7 @@ bool WriteFile(const char *szFile, const string &strData);
 bool WriteFile(const char *szFile, const char *szData, size_t sLen);
 bool WriteFile(string &strData, const char *szFormatPath, ...);
 bool WriteFile(const char *szData, size_t sLen, const char *szFormatPath, ...);
+bool CopyFile(const char *szFromFile, const char *szToFile);
 bool AppendFile(const char *szFile, const string &strData);
 bool AppendFile(const char *szFile, const char *szData, size_t sLen);
 bool AppendFile(const string &strData, const char *szFormatPath, ...);

@@ -152,6 +152,16 @@ bool ReadFile(string &strData, const char *szFormatPath, ...)
 	return ReadFile(szPath, strData);
 }
 
+bool CopyFile(const char *szFromFile, const char *szToFile)
+{
+	string strData;
+	if(!ReadFile(szFromFile, strData))
+	{
+		return false;
+	}
+	return WriteFile(szToFile, strData);
+}
+
 bool AppendFile(const char *szFile, const char *szData, size_t sLen)
 {
 	FILE *fp = fopen(szFile, "ab+");
