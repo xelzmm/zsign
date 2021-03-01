@@ -488,7 +488,7 @@ bool ZAppBundle::SignFolder(ZSignAsset *pSignAsset, const string &strFolder, con
 			if (pSignAsset->m_strBundleId != strOldBundleID)
 			{
 				strBundleID = pSignAsset->m_strBundleId;
-				ZLog::PrintV(">>> BundleId: \t%s (from Info.plist)\n", strBundleID.c_str());
+				ZLog::PrintV(">>> BundleId: \t%s (from mobileprovision)\n", strBundleID.c_str());
 			}
 		}
 	}
@@ -520,7 +520,7 @@ bool ZAppBundle::SignFolder(ZSignAsset *pSignAsset, const string &strFolder, con
 							string strNewPlugInBundleID = strOldPlugInBundleID;
 							StringReplace(strNewPlugInBundleID, strOldBundleID, strBundleID);
 							jvPlugInInfoPlist["CFBundleIdentifier"] = strNewPlugInBundleID;
-							ZLog::PrintV(">>> BundleId: \t%s -> %s, %s\n", strOldPlugInBundleID.c_str(), strNewPlugInBundleID.c_str(), basename((char *)strPlugin.c_str()));
+							ZLog::PrintV(">>> BundleId: \t%s -> %s, %s\n", strOldPlugInBundleID.c_str(), strNewPlugInBundleID.c_str(), basename((char *)string(strPlugin).c_str()));
 
 							if (jvPlugInInfoPlist.has("WKCompanionAppBundleIdentifier"))
 							{
@@ -551,7 +551,8 @@ bool ZAppBundle::SignFolder(ZSignAsset *pSignAsset, const string &strFolder, con
 						if (jvPlugInInfoPlist.has("CFBundleExecutable"))
 						{
 							string strBundleExe = jvPlugInInfoPlist["CFBundleExecutable"];
-							string strPluginProvisionFile = string(dirname((char *)pSignAsset->m_strProvisionFile.c_str())) + "/" + strBundleExe + ".mobileprovision";
+							string strProvisionFile = pSignAsset->m_strProvisionFile;
+							string strPluginProvisionFile = string(dirname((char *)strProvisionFile.c_str())) + "/" + strBundleExe + ".mobileprovision";
 							string strEmbeddedProvisionFile = strPlugin + "/" + "embedded.mobileprovision";
 							if (IsFileExists(strPluginProvisionFile.c_str()))
 							{
